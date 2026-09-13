@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "deputy-agent"
+version = "0.1.0"
+description = "Bounded delegation for autonomous agents: reserved zones, a quorum where silence is never mistaken for caution, a cap on consecutive self-authorisations, and a journal that makes a dead mechanism visible."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Eduardo de Souza Marques" }]
+maintainers = [{ name = "Eduardo de Souza Marques" }]
+keywords = [
+    "agents", "autonomy", "delegation", "guardrails", "human-in-the-loop",
+    "consent", "audit-trail", "fail-closed", "llm", "agent-safety",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Monitoring",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+
+# No runtime dependencies. The decision is pure Python and the journal is
+# NDJSON written with the standard library; predictors are a protocol the
+# caller satisfies however it likes, so no model vendor is privileged here.
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/edusouzaxGV/deputy"
+Repository = "https://github.com/edusouzaxGV/deputy"
+Issues = "https://github.com/edusouzaxGV/deputy/issues"
+
+[project.scripts]
+deputy = "deputy.cli:main"
+
+[tool.hatch.build.targets.wheel]
+# deputy/py.typed travels with this; without the marker PEP 561 tells type
+# checkers to ignore every annotation in the installed package.
+packages = ["deputy"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/deputy", "/tests", "/README.md", "/PROVENANCE.md", "/LICENSE"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
