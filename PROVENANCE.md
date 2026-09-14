@@ -2,7 +2,7 @@
 
 **Author:** Eduardo de Souza Marques
 **Licence:** MIT
-**Repository:** https://github.com/edusouzaxGV/deputy
+**Repository:** https://github.com/edusouzamarques/deputy
 
 ## Where this came from
 
